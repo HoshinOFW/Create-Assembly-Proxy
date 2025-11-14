@@ -1,0 +1,16 @@
+{
+  "itemGroup.createbuildstonetoolkit.assembly_proxy": "Create: Buildstone Toolkit",
+
+  "block.createbuildstonetoolkit.assembly_proxy": "Assembly Proxy",
+
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.summary": "A powerful block capable of _assembling anything_ from a distance.",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.condition1": "When targeting a block and assembled into a contraption:",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.behaviour1": "Will _extend_ the assembly to the target block, like a sort of _wireless super glue_. If the target block is _glued to others_, _they will all_ assemble and _move alongside_ the original contraption!",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.condition2": "When powered by redstone:",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.behaviour2": "_Cancels_ special behavior",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.control1": "When Right-Clicked in-world with Proxy Tuner:",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.action1": "_Set target_ to Proxy Tuner's selection.",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.control2": "When Shift-Right-Clicked in-world with Proxy Tuner:",
+  "item.createbuildstonetoolkit.assembly_proxy.tooltip.action2": "Will _set the Proxy Tuner's selection_ to the proxy, as well as _display the current target location_."
+
+}

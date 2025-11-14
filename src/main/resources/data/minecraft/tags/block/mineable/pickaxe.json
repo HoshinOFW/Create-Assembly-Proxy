@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    "createbuildstonetoolkit:assembly_proxy"
+  ]
+}

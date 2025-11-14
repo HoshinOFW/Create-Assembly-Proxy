@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": { "item": "create:brass_ingot" },
+    "P": { "item": "buildstonetoolkit:piston_proxy" },
+    "Z": { "item": "create:zinc_ingot" },
+    "R": { "item": "create:precision_mechanism" }
+  },
+  "pattern": [
+    "III",
+    "IPI",
+    "ZRZ"
+  ],
+  "result": {
+    "id": "createbuildstonetoolkit:assembly_proxy",
+    "count": 1
+  }
+}

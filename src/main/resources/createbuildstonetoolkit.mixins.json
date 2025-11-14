@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.github.hoshinofw.createbuildstonetoolkit.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "ContraptionMixin",
+    "GuidedProxyBlockMixin",
+    "PistonProxyBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

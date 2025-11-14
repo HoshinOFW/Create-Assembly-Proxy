@@ -1,3 +1,14 @@
+/neoforge/.gradle/
+/neoforge/build/
+/neoforge/run/
+/forge/.gradle/
+/forge/build/
+/forge/run/
+/fabric/.gradle
+/fabric/build
+/fabric/run
+/run
+
 .gradle
 **/build/
 !**/src/**/build/

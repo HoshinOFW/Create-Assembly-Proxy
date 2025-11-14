@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "power_level=0": { "model": "createbuildstonetoolkit:block/assembly_proxy_off"},
+    "power_level=1": { "model": "createbuildstonetoolkit:block/assembly_proxy_on"},
+    "power_level=2": { "model": "createbuildstonetoolkit:block/assembly_proxy_on"}
+  }
+}
