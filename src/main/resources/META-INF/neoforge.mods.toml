@@ -9,9 +9,9 @@ version = "${version}"
 displayName = "Create: Buildstone Toolkit"
 authors = "HoshinOFW"
 description = '''
-A Create and Buildstone Toolkit addon aiming to raise the aeshetic ceiling of both mods!
+A Create and Buildstone Toolkit addon aiming to raise the aesthetic ceiling of both mods!
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.createbuildstonetoolkit]]
 modId = "neoforge"
