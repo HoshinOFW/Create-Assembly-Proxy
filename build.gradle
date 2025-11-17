@@ -30,7 +30,7 @@ dependencies {
     mappings loom.officialMojangMappings()
     neoForge "net.neoforged:neoforge:$project.neoforge_version"
 
-    implementation("com.github.hoshinofw.buildstonetoolkit:buildstonetoolkit-neoforge:${buildstonetoolkit_version}")
+    implementation("com.github.hoshinofw.buildstonetoolkit:buildstonetoolkit-neoforge:${minecraft_version}-${buildstonetoolkit_version}")
 
 
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
