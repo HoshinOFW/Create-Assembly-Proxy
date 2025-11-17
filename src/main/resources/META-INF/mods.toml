@@ -1,45 +1,40 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 #issueTrackerURL = ""
-license = "Apache License 2.0"
+license = "${mod_license}"
 
 [[mods]]
 modId = "createbuildstonetoolkit"
 version = "${version}"
-displayName = "Create: Buildstone Toolkit"
-authors = "HoshinOFW"
-description = '''
-A Create and Buildstone Toolkit addon aiming to raise the aeshetic ceiling of both mods!
-'''
-#logoFile = ""
+displayName = "${mod_name}"
+authors = "${mod_author}"
+description = "${mod_description}"
+logoFile = "icon.png"
 
 [[dependencies.createbuildstonetoolkit]]
-modId = "neoforge"
-type = "required"
-versionRange = "[21.1,)"
-ordering = "NONE"
-side = "BOTH"
+modId="forge"
+mandatory = true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
 
 [[dependencies.createbuildstonetoolkit]]
 modId = "minecraft"
-type = "required"
-versionRange = "[1.21.1,)"
+mandatory = true
+versionRange = "${minecraft_version}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.createbuildstonetoolkit]]
 modId = "buildstonetoolkit"
-type = "required"
+mandatory = true
 versionRange = "[${bt_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.createbuildstonetoolkit]]
 modId = "create"
-type = "required"
+mandatory = true
 versionRange = "[${create_version},)"
 ordering = "NONE"
 side = "BOTH"
-
-[[mixins]]
-config = "createbuildstonetoolkit.mixins.json"

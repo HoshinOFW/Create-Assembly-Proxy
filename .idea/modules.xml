@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.hoshinofw.create_assembly_proxy.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.hoshinofw.create_assembly_proxy.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_assembly_proxy.main.iml" filepath="$PROJECT_DIR$/.idea/modules/create_assembly_proxy.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_assembly_proxy.test.iml" filepath="$PROJECT_DIR$/.idea/modules/create_assembly_proxy.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_buildstonetoolkit.iml" filepath="$PROJECT_DIR$/.idea/modules/create_buildstonetoolkit.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_buildstonetoolkit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/create_buildstonetoolkit.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_buildstonetoolkit.test.iml" filepath="$PROJECT_DIR$/.idea/modules/create_buildstonetoolkit.test.iml" />
     </modules>

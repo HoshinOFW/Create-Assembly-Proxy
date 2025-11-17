@@ -8,6 +8,8 @@
 /fabric/build
 /fabric/run
 /run
+/run_data
+/run_server
 
 .gradle
 **/build/

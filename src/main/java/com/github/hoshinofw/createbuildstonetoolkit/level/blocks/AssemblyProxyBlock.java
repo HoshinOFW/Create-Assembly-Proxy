@@ -42,12 +42,12 @@ public class AssemblyProxyBlock extends Block implements EntityBlock, IProxyBloc
 
     @Override
     public void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos pos2, boolean bl) {
-        IProxyBlock.super.neighborChanged(state, level, pos, block, pos2, bl);
+        setPowerLevel(level, pos, parseRedstoneToPowerLevel(level.getBestNeighborSignal(pos)));
     }
 
     @Override
     public void onPlace(@NotNull BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean bl) {
-        IProxyBlock.super.onPlace(oldState, level, pos, newState, bl);
+        neighborChanged(newState, level, pos, newState.getBlock(), pos, bl);
     }
 
     @Override

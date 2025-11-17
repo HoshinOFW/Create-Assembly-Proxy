@@ -1,70 +1,163 @@
 plugins {
-    id 'dev.architectury.loom' version '1.11-SNAPSHOT'
-    id 'maven-publish'
+    id("idea")
+    id("eclipse")
+    id("maven-publish")
+    id("net.kyori.blossom") version "2.1.0" // https://github.com/KyoriPowered/blossom
+    id("dev.ithundxr.silk") version "0.11.15" // https://github.com/ithundxr/silk
+    id("me.modmuss50.mod-publish-plugin") version "0.8.4" // https://github.com/modmuss50/mod-publish-plugin
+    id("net.neoforged.moddev.legacyforge") version "2.0.107" // https://projects.neoforged.net/neoforged/ModDevGradle
+    id("org.jetbrains.gradle.plugin.idea-ext") version "1.1.8" // https://github.com/JetBrains/gradle-idea-ext-plugin
 }
 
-group = project.maven_group
-version = project.mod_version
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
 base {
-    archivesName = project.archives_name
+    archivesName = "${rootProject.archives_name}-forge-${project.minecraft_version}"
+    version = project.mod_version
+    group = project.maven_group
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+java {
+    withSourcesJar()
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+legacyForge {
+    version = "$minecraft_version-$forge_version"
+
+    validateAccessTransformers = false
+
+    if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
+        accessTransformers.from "src/main/resources/META-INF/accesstransformer.cfg"
+    }
+
+    parchment {
+        minecraftVersion = minecraft_version
+        mappingsVersion = parchment_version
+    }
+
+    mods {
+        createbuildstonetoolkit {
+            sourceSet sourceSets.main
+        }
+    }
+
+
+    runs {
+        // applies to all the run configs below
+        configureEach {
+            systemProperty("forge.logging.markers", "")
+            systemProperty("forge.logging.console.level", "info")
+            jvmArguments = ["-XX:+IgnoreUnrecognizedVMOptions", "-XX:+AllowEnhancedClassRedefinition"]
+            //jvmArgs("-XX:-OmitStackTraceInFastThrow") // uncomment when you get exceptions with null messages etc
+            //jvmArgs "-XX:+UnlockCommercialFeatures" // uncomment for profiling
+
+            systemProperty("mixin.debug.export", "true")
+            systemProperty("mixin.debug.verbose", "true")
+
+            programArgument '-mixin.config=createbuildstonetoolkit.mixins.json'
+        }
+
+        client {
+            client()
+            gameDirectory = project.file("run")
+        }
+
+        server {
+            server()
+            gameDirectory = project.file("run/server")
+        }
+
+        data {
+            data()
+            gameDirectory = project.file("run")
+            systemProperty("forge.logging.markers", "REGISTRIES,REGISTRYDUMP")
+            systemProperty("forge.logging.console.level", "debug")
+            programArguments.addAll(
+                    "--mod", mod_id as String,
+                    "--all",
+                    "--output", file("src/generated/resources/").getAbsolutePath(),
+                    "--existing", file("src/main/resources").getAbsolutePath()
+            )
+        }
+    }
 }
 
 repositories {
     mavenLocal()
+    mavenCentral()
+    maven {url "https://maven.neoforged.net"}
+    maven { url = "https://maven.createmod.net" } // Ponder, Flywheel
+    maven { url = "https://maven.ithundxr.dev/mirror" } // Registrate
+    maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
+    maven { url = "https://harleyoconnor.com/maven" } // Dynamic Trees
+    maven { url = "https://maven.theillusivec4.top/" } // Curios API
+    maven { url = "https://maven.squiddev.cc" } // CC: Tweaked
+    maven { url = "https://www.cursemaven.com" }
+    maven { url = "https://api.modrinth.com/maven" }
+    maven { url = "https://maven.ftb.dev/releases" } // FTB Mods
+    maven { url = "https://maven.architectury.dev" } // Arch API
     maven {
-        name = 'NeoForged'
-        url = 'https://maven.neoforged.net/releases'
+        url = "https://jm.gserv.me/repository/maven-public" // JourneyMap
+        content {
+            includeGroup "info.journeymap"
+            includeGroup "mysticdrew"
+        }
     }
-    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-    maven { url = "https://mvn.devos.one/snapshots" } // Registrate
-}
-
-loom {
-    silentMojangMappingsLicense()
+    maven {url = 'https://maven.minecraftforge.net/'}
+    maven { url = "https://maven.architectury.dev/" }
+    maven { url = "https://jitpack.io" }
+    maven { url = "https://maven.terraformersmc.com/" }
+    maven { url = "https://mvn.devos.one/snapshots" }
 }
 
 dependencies {
-    minecraft "net.minecraft:minecraft:$project.minecraft_version"
-    mappings loom.officialMojangMappings()
-    neoForge "net.neoforged:neoforge:$project.neoforge_version"
+    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}-${create_version_number}:slim") { transitive = false }
+    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
+    modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_minecraft_version}:${flywheel_version}")
+    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    implementation("com.github.hoshinofw.buildstonetoolkit:buildstonetoolkit-neoforge:${buildstonetoolkit_version}")
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
 
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
-    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
-    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
-    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
-
+    modImplementation("dev.architectury:architectury-forge:${architectury_api_version}")
+    modImplementation("com.github.hoshinofw.buildstonetoolkit:buildstonetoolkit-forge:${minecraft_version}-${buildstonetoolkit_version}")
 }
 
 processResources {
-    inputs.property 'version', project.version
-    inputs.property "bt_version", rootProject.findProperty("buildstone_toolkit_version") ?: "0.0.0"
-    //Sanitize build code
-    inputs.property "create_version", project.create_version.split('-')[0] ?: "0.0.0"
+    var replaceProperties = [
+            mod_id          : mod_id,
+            bt_version      : buildstonetoolkit_version,
+            version         : mod_version,
+            create_version  : create_version,
+            mod_name        : mod_name,
+            mod_author      : mod_author,
+            mod_description : mod_description,
+            mod_license     : mod_license,
+            minecraft_version: minecraft_version
+    ]
 
+    replaceProperties.put("file", [jarVersion: project.version])
 
-    filesMatching('META-INF/neoforge.mods.toml') {
-        expand (
-                version: inputs.properties.version,
-                bt_version: rootProject.findProperty("buildstonetoolkit_version") ?: "0.0.0",
-                create_version: project.create_version.split('-')[0] ?: "0.0.0"
-        )
+    filesMatching('META-INF/mods.toml') {
+        expand(replaceProperties)
     }
-}
-
-java {
-    withSourcesJar()
-
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
 }
 
 publishing {

@@ -5,15 +5,17 @@ import com.github.hoshinofw.createbuildstonetoolkit.level.blocks.AssemblyProxyBl
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Supplier;
 
 public class CBTBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.createBlocks(CreateBuildstoneToolkit.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CreateBuildstoneToolkit.MOD_ID);
 
-    public static final DeferredHolder<Block, Block> ASSEMBLY_PROXY = BLOCKS.register("assembly_proxy",
+    public static final Supplier<Block> ASSEMBLY_PROXY = BLOCKS.register("assembly_proxy",
             () -> new AssemblyProxyBlock(BlockBehaviour.Properties.of()
                     .requiresCorrectToolForDrops()
                     .strength(2.0f, 6.0f)

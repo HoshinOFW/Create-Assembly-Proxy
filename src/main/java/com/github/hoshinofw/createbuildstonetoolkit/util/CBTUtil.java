@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 
-public class APUtil {
+public class CBTUtil {
 
     public static BlockPos computeOffset(BlockPos origin, BlockPos targetPos) {
         return targetPos.subtract(origin);

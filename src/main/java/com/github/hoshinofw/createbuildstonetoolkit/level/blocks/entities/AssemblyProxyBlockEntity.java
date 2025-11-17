@@ -1,7 +1,7 @@
 package com.github.hoshinofw.createbuildstonetoolkit.level.blocks.entities;
 
 import com.github.hoshinofw.createbuildstonetoolkit.registries.CBTBlockEntities;
-import com.github.hoshinofw.createbuildstonetoolkit.util.APUtil;
+import com.github.hoshinofw.createbuildstonetoolkit.util.CBTUtil;
 import com.simibubi.create.foundation.blockEntity.SyncedBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -18,21 +18,21 @@ public class AssemblyProxyBlockEntity extends SyncedBlockEntity {
     }
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setTargetOffset(APUtil.getTargetOffsetFromNBT(tag));
+    public void load(@NotNull CompoundTag tag) {
+        super.load(tag);
+        setTargetOffset(CBTUtil.getTargetOffsetFromNBT(tag));
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag tag, @NotNull  HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putIntArray("targetOffset", APUtil.blockPosToArray(getTargetOffset()));
+    public void saveAdditional(@NotNull CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putIntArray("targetOffset", CBTUtil.blockPosToArray(getTargetOffset()));
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag(@NotNull HolderLookup.Provider provider) {
-        CompoundTag tag = super.getUpdateTag(provider);
-        if (this.targetOffset != null) {tag.putIntArray("targetOffset", APUtil.blockPosToArray(this.targetOffset));}
+    public @NotNull CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
+        if (this.targetOffset != null) {tag.putIntArray("targetOffset", CBTUtil.blockPosToArray(this.targetOffset));}
         return tag;
     }
 

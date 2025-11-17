@@ -1,5 +1,2 @@
 TODO
-    Make a small showcase video, so I can show the mod in discord servers
-    Test on an actual client
-    Publish!
-    Port to 1.20.1
+    proxy not working
