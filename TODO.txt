@@ -1,3 +1,6 @@
 TODO 
+    Recipes for this and CBT might be broken in 1.20.1
+    Redstone proxy
+    
     Make a small showcase video, so I can show the mod in discord servers
     
