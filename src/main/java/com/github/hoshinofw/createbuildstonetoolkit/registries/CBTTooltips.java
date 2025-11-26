@@ -13,10 +13,10 @@ public class CBTTooltips {
                 "item" + CreateBuildstoneToolkit.MOD_ID +  "assembly_proxy"
         );
 
-          TooltipModifier.REGISTRY.register(
-                  CBTItems.ASSEMBLY_PROXY.get(),
-                  new ItemDescription.Modifier(CBTItems.ASSEMBLY_PROXY.get(),
-                          FontHelper.Palette.STANDARD_CREATE)
-                  );
+        TooltipModifier.REGISTRY.register(
+              CBTItems.ASSEMBLY_PROXY.get(),
+              new ItemDescription.Modifier(CBTItems.ASSEMBLY_PROXY.get(),
+                      FontHelper.Palette.STANDARD_CREATE)
+              );
     }
 }

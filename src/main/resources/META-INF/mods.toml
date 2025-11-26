@@ -35,6 +35,9 @@ side = "BOTH"
 [[dependencies.createbuildstonetoolkit]]
 modId = "create"
 mandatory = true
-versionRange = "[${create_version},)"
+versionRange = "[6.0.6, ${max_supported_create_version}]"
 ordering = "NONE"
 side = "BOTH"
+
+#[[mixins]]
+#config = "createbuildstonetoolkit.mixins.json"

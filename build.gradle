@@ -16,6 +16,17 @@ idea {
     }
 }
 
+mixin {
+    add sourceSets.main, 'createbuildstonetoolkit.refmap.json'
+    config 'createbuildstonetoolkit.mixins.json' // This can be done for multiple configs
+}
+
+jar {
+    manifest.attributes([
+            "MixinConfigs": "createbuildstonetoolkit.mixins.json"
+    ])
+}
+
 base {
     archivesName = "${rootProject.archives_name}-forge-${project.minecraft_version}"
     version = project.mod_version
@@ -125,7 +136,9 @@ repositories {
 }
 
 dependencies {
-    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}-${create_version_number}:slim") { transitive = false }
+    modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}-${create_version_number}:all")
+    modRuntimeOnly("com.simibubi.create:create-${minecraft_version}:${create_version}-${create_version_number}:slim")
+    //modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}-${create_version_number}:slim") { transitive = false }
     modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
     modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_minecraft_version}:${flywheel_version}")
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
@@ -146,6 +159,7 @@ processResources {
             bt_version      : buildstonetoolkit_version,
             version         : mod_version,
             create_version  : create_version,
+            max_supported_create_version : max_supported_create_version,
             mod_name        : mod_name,
             mod_author      : mod_author,
             mod_description : mod_description,
